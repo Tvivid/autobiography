@@ -1,0 +1,32 @@
+# 서버 포트 설정
+server:
+  port: 8082
+  servlet:
+    context-path: /
+
+# database 연동 설정
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_codingrecipe?serverTimezone=Asia/Seoul
+    username: user_codingrecipe
+    password: Sm364183!
+  thymeleaf:
+    cache: false
+
+  # spring data jpa 설정
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+#카카오 회원가입을 통한 회원들의 비밀번호를 이걸로 고정 노출 X
+cos:
+  key: cos20240101
