@@ -9,5 +9,7 @@ import com.cos.blog.model.Board;
 
 public interface BoardRepository extends JpaRepository<Board, Integer>{
     Page<Board> findByUser(User user, Pageable pageable);
+    Page<Board> findBySecretTrue(Pageable pageable);
+
 
 }

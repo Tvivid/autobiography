@@ -34,7 +34,7 @@ public class BoardService {
 	
 	@Transactional(readOnly = true)
 	public Page<Board> 글목록(Pageable pageable){
-		return boardRepository.findAll(pageable);
+		return boardRepository.findBySecretTrue(pageable);
 	}
 
 	@Transactional(readOnly = true)
