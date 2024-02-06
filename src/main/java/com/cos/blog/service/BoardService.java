@@ -49,6 +49,11 @@ public class BoardService {
 					return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
 				});
 	}
+
+	@Transactional(readOnly = true)
+	public long 내가쓴글갯수(User user){
+		return boardRepository.countByUser(user);
+	}
 	
 	@Transactional
 	public void 글삭제하기(int id) {

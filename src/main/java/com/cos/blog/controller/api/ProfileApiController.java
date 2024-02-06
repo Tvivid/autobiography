@@ -25,7 +25,7 @@ public class ProfileApiController {
 
 
 
-    @PutMapping("/profile")
+    @PutMapping("api/profile")
     public ResponseDto<Integer> update(@RequestBody Profile profile){
         profileService.프로필수정하기(profile);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);

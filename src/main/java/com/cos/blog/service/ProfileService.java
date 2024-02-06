@@ -9,6 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +46,13 @@ public class ProfileService {
                 }); // 영속화 완료
         profile.setNickname(requestProfile.getNickname());
         profile.setIntroduce(requestProfile.getIntroduce());
+    }
+
+    @Transactional
+    public void ProfilePicture(MultipartFile file) throws IOException {
+        Profile profile = new Profile();
+        profile.setProfilePicture(file.getBytes());
+        profileRepository.save(profile);
     }
 
 

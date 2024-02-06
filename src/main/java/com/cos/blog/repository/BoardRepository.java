@@ -11,5 +11,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer>{
     Page<Board> findByUser(User user, Pageable pageable);
     Page<Board> findBySecretTrue(Pageable pageable);
 
+    long countByUser(User user);
+
 
 }

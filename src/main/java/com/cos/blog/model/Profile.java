@@ -31,4 +31,7 @@ public class Profile {
     @OneToOne(fetch = FetchType.EAGER)  // Many = Many,  User = One
     @JoinColumn(name = "userId")
     private User user; // DB는 오브젝트를 저장할 수 없다. FK, 자바는 오브젝트를 저장할 수 있다.
+
+    @Lob
+    private byte[] profilePicture;
 }
