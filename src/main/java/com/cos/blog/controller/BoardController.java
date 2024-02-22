@@ -28,20 +28,20 @@ public class BoardController {
 	
 	// 컨트롤로에서 세션을 어떻게 찾는지?
 	// @AuthenticationPrincipal PrincipalDetail principal
-	@GetMapping({"", "/"})
+	@GetMapping("/api/community")
 	public String index(Model model, @PageableDefault(size=3, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {  
 		model.addAttribute("boards", boardService.글목록(pageable));
 		return "index"; // viewResolver 작동!!
 	}
 	
-	@GetMapping("/board/{id}")
+	@GetMapping("api/board/{id}")
 	public String findById(@PathVariable int id, Model model) {
 		model.addAttribute("board", boardService.글상세보기(id));
 		
 		return "board/detail";
 	}
 	
-	@GetMapping("/board/{id}/updateForm")
+	@GetMapping("api/board/{id}/updateForm")
 	public String updateForm(@PathVariable int id, Model model) {
 		model.addAttribute("board", boardService.글상세보기(id));
 		return "board/updateForm";
