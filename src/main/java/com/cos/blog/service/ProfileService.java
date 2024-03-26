@@ -44,8 +44,13 @@ public class ProfileService {
                 .orElseThrow(()->{
                     return new IllegalArgumentException("글 찾기 실패 : 아이디를 찾을 수 없습니다.");
                 }); // 영속화 완료
-        profile.setNickname(requestProfile.getNickname());
-        profile.setIntroduce(requestProfile.getIntroduce());
+
+        if(requestProfile.getNickname()!=null){
+            profile.setNickname(requestProfile.getNickname());
+        }
+        if(requestProfile.getIntroduce()!=null){
+            profile.setIntroduce(requestProfile.getIntroduce());
+        }
     }
 
     @Transactional

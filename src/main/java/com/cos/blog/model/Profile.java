@@ -26,7 +26,7 @@ public class Profile {
     @Column(nullable = false, length = 100)
     private String introduce;
 
-//	private int count; // 조회수
+
 
     @OneToOne(fetch = FetchType.EAGER)  // Many = Many,  User = One
     @JoinColumn(name = "userId")
