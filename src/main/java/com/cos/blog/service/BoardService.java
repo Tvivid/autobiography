@@ -1,5 +1,6 @@
 package com.cos.blog.service;
 
+import com.cos.blog.JWT.JwtTokenProvider;
 import com.cos.blog.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class BoardService {
 	
 	private final BoardRepository boardRepository;
+	private final JwtTokenProvider jwtTokenProvider;
 
 	private final UserRepository userRepository;
 
@@ -27,7 +29,13 @@ public class BoardService {
 //	}
 
 	@Transactional
-	public void 글쓰기(Board board, User user) { // title, content
+	public void 글쓰기(Board board, String token) { // title, content
+
+
+		String username = jwtTokenProvider.getAuthentication(token).getName();
+
+		User user = userRepository.findByUsername(username)
+				.orElseThrow(() -> new IllegalArgumentException("cannot find user"));
 		board.setUser(user);
 		boardRepository.save(board);
 	}
@@ -38,7 +46,13 @@ public class BoardService {
 	}
 
 	@Transactional(readOnly = true)
-	public Page<Board> 내가쓴글목록(Pageable pageable, User user) {
+	public Page<Board> 내가쓴글목록(Pageable pageable, String token) {
+		String username = jwtTokenProvider.getAuthentication(token).getName();
+
+		User user = userRepository.findByUsername(username)
+				.orElseThrow(() -> new IllegalArgumentException("cannot find user"));
+
+
 		return boardRepository.findByUser(user, pageable);
 	}
 	
@@ -51,7 +65,11 @@ public class BoardService {
 	}
 
 	@Transactional(readOnly = true)
-	public long 내가쓴글갯수(User user){
+	public long 내가쓴글갯수(String token){
+		String username = jwtTokenProvider.getAuthentication(token).getName();
+
+		User user = userRepository.findByUsername(username)
+				.orElseThrow(() -> new IllegalArgumentException("cannot find user"));
 		return boardRepository.countByUser(user);
 	}
 	
