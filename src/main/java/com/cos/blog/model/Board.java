@@ -38,6 +38,9 @@ public class Board {
 	
 	@Column(nullable = false, length = 100)
 	private String title;
+
+	@Column(nullable = false, length = 100)
+	private String question;
 	
 	@Lob // 대용량 데이터
 	private String content; // 섬머노트 라이브러리 <html>태그가 섞여서 디자인이 됨.
